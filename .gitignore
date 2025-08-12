@@ -1,0 +1,20 @@
+# 環境變數
+.env
+
+# Python 暫存檔
+__pycache__/
+*.pyc
+
+# 紀錄檔
+logs/
+*.log
+
+# 忽略特定檔案
+gemini_start.ipynb
+jsonMerge.py
+
+# 忽略題庫資料夾
+國文題庫/
+地理題庫/
+數學題庫/
+自然題庫/
