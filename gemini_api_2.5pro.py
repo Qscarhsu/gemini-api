@@ -8,7 +8,7 @@ import os
 
 load_dotenv()
 
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=api_key)
 
 
@@ -102,23 +102,16 @@ temperature = 1
 max_output_token = 512
 
 
-json_path = "南一_自然_.json"
+# json_path = "南一_自然_.json"
 
-with open(json_path, "r", encoding="utf_8") as f:
+# with open(json_path, "r", encoding="utf_8") as f:
 
-    data = json.load(f)
-
-student_answer = "B"
-temperature = 1
-max_output_token = 512
+#     data = json.load(f)
 
 
-for question in data:
+print(
+    student_learning_evaluation(question, student_answer, temperature, max_output_token)
+)
 
-    print(
-        student_learning_evaluation(
-            question, student_answer, temperature, max_output_token
-        )
-    )
 
-    print(solution_guidance(question, student_answer, temperature, max_output_token))
+print(solution_guidance(question, student_answer, temperature, max_output_token))
