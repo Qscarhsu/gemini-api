@@ -5,7 +5,7 @@ import json
 
 # --- 1. 設定 Gemini API 金鑰 ---
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = os.getenv("GOOGLE_API_KEY")
 
 if not api_key:
     print("錯誤：未找到 GEMINI_API_KEY 環境變數。")

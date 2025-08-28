@@ -26,7 +26,7 @@ def student_learning_evaluation(
                 學生答案：{student_answer}
                 """
     model = genai.GenerativeModel(
-        model_name="gemini-2.5-pro",
+        model_name="gemini-2.0-flash",
         generation_config={
             "temperature": temperature,  # 溫度，0~2.0 越低越穩定
             "top_p": 0.95,  # (可選) Nucleus sampling
@@ -61,7 +61,7 @@ def solution_guidance(
                     學生答案：{student_answer}"""
     guidance_json = {"題目詳解與教學建議": None}
     model = genai.GenerativeModel(
-        model_name="gemini-2.5-pro",
+        model_name="gemini-2.0-flash",
         generation_config={
             "temperature": temperature,  # 溫度，0~2.0 越低越穩定
             "top_p": 0.95,  # (可選) Nucleus sampling
@@ -113,12 +113,48 @@ temperature = 1
 max_output_token = 512
 
 
-for question in data:
+# for question in data:
 
-    print(
-        student_learning_evaluation(
-            question, student_answer, temperature, max_output_token
-        )
-    )
+#     print(
+#         student_learning_evaluation(
+#             question, student_answer, temperature, max_output_token
+#         )
+#     )
 
-    print(solution_guidance(question, student_answer, temperature, max_output_token))
+#     print(solution_guidance(question, student_answer, temperature, max_output_token))
+
+#####使用name__main__來測試功能
+
+if __name__ == "__main__":
+
+    question = {
+        "grade": "7A",
+        "subject": "國文",
+        "publisher": "翰林",
+        "chapter": "夏夜",
+        "topic": "詩歌賞析",
+        "knowledge_point": [
+            "意象",
+            "譬喻",
+            "擬人",
+            "詩歌主旨"
+        ],
+        "difficulty": "normal",
+        "question": "楊喚的《夏夜》一詩中，詩人透過哪些意象的描寫，營造出夏夜寧靜而充滿生機的氛圍？下列選項何者說明最為恰當？",
+        "options": {
+            "A": "「小河」的流動與「螢火蟲」的閃爍，象徵時間的快速流逝。",
+            "B": "「小蟲」的歌唱與「青蛙」的鼓噪，展現夏夜的熱鬧喧囂。",
+            "C": "「星星」的眨眼與「月亮」的微笑，運用擬人手法，使夏夜充滿童趣與生命力。",
+            "D": "「夜風」的輕拂與「花草」的搖曳，暗示夏夜的涼爽與寂寥。"
+        },
+        "answer": "C",
+        "explanation": "《夏夜》一詩中，「星星」的眨眼和「月亮」的微笑，是詩人運用擬人法，將無生命的星月賦予人的動作與情感，使夏夜的景象更為生動活潑，充滿童趣與生命力，營造出寧靜而富有生機的氛圍。選項A的「時間快速流逝」與詩意不符；選項B的「熱鬧喧囂」與詩中寧靜的氛圍不符；選項D的「寂寥」與詩中充滿生命力的氛圍不符。"
+    }
+        
+
+    student_answer = "D"
+    temperature = 1
+    max_output_token = 256
+    print(student_learning_evaluation(question, student_answer, temperature, max_output_token))
+
+    print(solution_guidance(question, student_answer, temperature, max_output_token))    
